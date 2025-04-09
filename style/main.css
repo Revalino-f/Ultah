@@ -94,6 +94,9 @@ body {
   font-size: 80%;
 }
 
+.wish-hbd span {
+  margin: 0 2px;
+}
 
 .six {
   position: relative;
@@ -299,5 +302,39 @@ body {
   .nine p {
     font-size: 1.5rem;
     font-weight: lighter;
+  }
+  .input-label {
+    display: block;
+    text-align: center;
+    font-size: 16px; /* Ukuran default */
+    margin: 10px 0;
+  }
+  
+
+}
+@media screen and (max-width: 480px) {
+  .swal2-popup {
+    font-size: 14px !important;
+    width: 90% !important;
+  }
+
+  .swal2-html-container,
+  .swal2-input-label {
+    font-size: 13px !important;
+    text-align: center !important;
+  }
+
+  .swal2-input {
+    font-size: 14px !important;
+    padding: 8px;
+  }
+
+  .swal2-title {
+    font-size: 16px !important;
+  }
+
+  .swal2-confirm {
+    font-size: 14px !important;
+    padding: 6px 12px;
   }
 }
