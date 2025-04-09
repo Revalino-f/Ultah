@@ -104,16 +104,25 @@
             <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="20" /></svg>
             <!-- Tambahan lingkaran bisa diulang sesuai kebutuhan -->
         </div>
-        <div class="nine">
-            <p>Scan QR ini buat kado kecil dari aku 🎁 <br>Soryy gandis cuma bisa ngasih hadiah ini.</p>
-            <img id="qr-shopeepay" src="img/dana.png" style="display: none; width: 200px;" alt="qr-shopeepay" />
-            <p id="replay">scan qr di atas, lalu open QR CODE Btw ini DANA</p>
-            <p class="last-smile">:)</p>
-          </div>
+        <div class="nine no-select">
+  <p>Scan QR ini buat kado kecil dari aku 🎁 <br>Soryy gandis cuma bisa ngasih hadiah ini.</p>
+  <img id="qr-shopeepay" class="img-protect" src="img/dana.png" style="display: none; width: 200px;" alt="qr-shopeepay" />
+  <p id="replay">scan qr di atas, lalu open QR CODE Btw ini DANA</p>
+  <p class="last-smile">:)</p>
+</div>
+
           
     </div>
 
 </body>
+  <script>
+  document.querySelector('.nine').addEventListener('contextmenu', function (e) {
+    if (e.target.tagName === 'IMG') {
+      e.preventDefault(); // Blok klik kanan hanya gambar di dalam .nine
+    }
+  });
+</script>
+
 <!-- Greensock -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
 <!-- Sweetalert -->
