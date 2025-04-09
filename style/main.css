@@ -13,6 +13,20 @@ body {
 .nine {
   text-align: center;
 }
+/* Blok seleksi teks */
+.six {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+/* Gambar tidak bisa diklik / disimpan */
+.six img {
+  pointer-events: none;
+  user-drag: none;
+  -webkit-user-drag: none;
+}
 
 #qr-shopeepay {
   margin: 20px auto;
