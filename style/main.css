@@ -10,7 +10,15 @@ body {
 .song {
   visibility: hidden;
 }
+.nine {
+  text-align: center;
+}
 
+#qr-shopeepay {
+  margin: 20px auto;
+  display: none;
+  width: auto;
+}
 .container {
   height: 100vh;
   margin: 0 auto;
