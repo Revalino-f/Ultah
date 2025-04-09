@@ -5,13 +5,6 @@ html {
 body {
   font-family: 'Poppins', sans-serif;
   margin: 0;
-   user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    pointer-events: none;
-    user-drag: none;
-    -webkit-user-drag: none;
 }
 
 .song {
@@ -236,6 +229,20 @@ body {
 .nine p {
   font-size: 2rem;
   font-weight: lighter;
+}
+/* Blok seleksi teks di .nine */
+.nine.no-select {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+/* Lindungi gambar dari klik kanan dan drag */
+.nine img.img-protect {
+  pointer-events: none;
+  user-drag: none;
+  -webkit-user-drag: none;
 }
 
   .nine {
