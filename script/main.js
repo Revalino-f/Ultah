@@ -21,11 +21,11 @@ const animationTimeline = () => {
   const textBoxChars = document.getElementsByClassName("hbd-chatbox")[0];
   const hbd = document.getElementsByClassName("wish-hbd")[0];
 
-  textBoxChars.innerHTML = `<span>${textBoxChars.innerHTML
+  textBoxChars.innerHTML = `<span>${textBoxChars.textContent.trim()
     .split("")
     .join("</span><span>")}</span>`;
 
-  hbd.innerHTML = `<span>${hbd.innerHTML.split("").join("</span><span>")}</span>`;
+  hbd.innerHTML = `<span>${hbd.textContent.trim().split("").join("</span><span>")}</span>`;
 
   const ideaTextTrans = {
     opacity: 0,
@@ -77,123 +77,125 @@ const animationTimeline = () => {
     .to(".idea-3", 0.7, ideaTextTransLeave, "+=2.5")
     .from(".idea-4", 0.7, ideaTextTrans)
     .to(".idea-4", 0.7, ideaTextTransLeave, "+=2.5")
-    .from(
-      ".idea-5",
-      0.7,
-      {
-        rotationX: 15,
-        rotationZ: -10,
-        skewY: "-5deg",
-        y: 50,
-        z: 10,
-        opacity: 0,
-      },
-      "+=1.5"
-    )
-    .to(
-      ".idea-5 span",
-      0.7,
-      {
-        rotation: 90,
-        x: 8,
-      },
-      "+=1.4"
-    )
+    .from(".idea-5", 0.7, {
+      rotationX: 15,
+      rotationZ: -10,
+      skewY: "-5deg",
+      y: 50,
+      z: 10,
+      opacity: 0,
+    }, "+=1.5")
+    .to(".idea-5 span", 0.7, {
+      rotation: 90,
+      x: 8,
+    }, "+=1.4")
     .to(".idea-5", 0.7, { scale: 0.2, opacity: 0 }, "+=2")
-    .staggerFrom(
-      ".idea-6 span",
-      0.8,
-      {
-        scale: 3,
-        opacity: 0,
-        rotation: 15,
-        ease: Expo.easeOut,
-      },
-      0.2
-    )
-    .staggerTo(
-      ".idea-6 span",
-      0.8,
-      {
-        scale: 3,
-        opacity: 0,
-        rotation: -15,
-        ease: Expo.easeOut,
-      },
-      0.2,
-      "+=1.5"
-    )
-    .staggerFromTo(
-      ".baloons img",
-      2.5,
-      {
-        opacity: 0.9,
-        y: 1400,
-      },
-      {
-        opacity: 1,
-        y: -1000,
-      },
-      0.2
-    )
-    .from(
-      ".profile-picture",
-      0.5,
-      {
-        scale: 3.5,
-        opacity: 0,
-        x: 25,
-        y: -25,
-        rotationZ: -45,
-      },
-      "-=2"
-    )
+    .staggerFrom(".idea-6 span", 0.8, {
+      scale: 3,
+      opacity: 0,
+      rotation: 15,
+      ease: Expo.easeOut,
+    }, 0.2)
+    .staggerTo(".idea-6 span", 0.8, {
+      scale: 3,
+      opacity: 0,
+      rotation: -15,
+      ease: Expo.easeOut,
+    }, 0.2, "+=1.5")
+    .staggerFromTo(".baloons img", 2.5, {
+      opacity: 0.9,
+      y: 1400,
+    }, {
+      opacity: 1,
+      y: -1000,
+    }, 0.2)
+    .from(".profile-picture", 0.5, {
+      scale: 3.5,
+      opacity: 0,
+      x: 25,
+      y: -25,
+      rotationZ: -45,
+    }, "-=2")
     .from(".hat", 0.5, {
       x: -100,
       y: 350,
       rotation: -180,
       opacity: 0,
     })
-    .staggerFrom(
-      ".wish-hbd span",
-      0.7,
-      {
-        opacity: 0,
-        y: -50,
-        rotation: 150,
-        skewX: "30deg",
-        ease: Elastic.easeOut.config(1, 0.5),
-      },
-      0.1
-    )
-    .staggerFromTo(
-      ".wish-hbd span",
-      0.7,
-      {
-        scale: 1.4,
-        rotationY: 150,
-      },
-      {
-        scale: 1,
-        rotationY: 0,
-        color: "#ff69b4",
-        ease: Expo.easeOut,
-      },
-      0.1,
-      "party"
-    )
-    .from(
-      ".wish h5",
-      0.5,
-      {
-        opacity: 0,
-        y: 10,
-        skewX: "-15deg",
-      },
-      "party"
-    )
+    .staggerFrom(".wish-hbd span", 0.7, {
+      opacity: 0,
+      y: -50,
+      rotation: 150,
+      skewX: "30deg",
+      ease: Elastic.easeOut.config(1, 0.5),
+    }, 0.1)
+    .staggerFromTo(".wish-hbd span", 0.7, {
+      scale: 1.4,
+      rotationY: 150,
+    }, {
+      scale: 1,
+      rotationY: 0,
+      color: "#ff69b4",
+      ease: Expo.easeOut,
+    }, 0.1, "party")
+    .from(".wish h5", 0.5, {
+      opacity: 0,
+      y: 10,
+      skewX: "-15deg",
+    }, "party")
     .add(() => {
-      checkBirthday(); // Panggil fungsi input tanggal
+      // Fungsi input ulang jika tanggal salah
+      const showDatePrompt = () => {
+        Swal.fire({
+          title: 'Masukin tanggal lahirmu ya!',
+          input: 'text',
+          inputLabel: 'Format: DD-MM-YYYY (contoh: 10-04-2007)',
+          inputPlaceholder: 'Ketik di sini...',
+          showCancelButton: false,
+          confirmButtonText: 'Cek',
+          allowOutsideClick: false,
+          inputValidator: (value) => {
+            if (!value) return 'Kamu belum isi apa-apa!';
+          }
+        }).then((result) => {
+          if (result.isConfirmed) {
+            const input = result.value.trim();
+            const tanggalBenar = "10-04-2007"; // Ganti sesuai kebutuhan
+
+            if (input === tanggalBenar) {
+              Swal.fire({
+                title: 'Yeay 🎉',
+                text: 'Ini QR-nya yaa~',
+                icon: 'success',
+                confirmButtonText: 'Tampilkan',
+              }).then(() => {
+                const nine = document.querySelector('.nine');
+                const qr = document.getElementById('qr-shopeepay');
+                const replay = document.getElementById('replay');
+
+                nine.style.display = 'block';
+                qr.style.display = 'block';
+                replay.style.display = 'block';
+
+                gsap.fromTo(nine, { opacity: 0 }, { opacity: 1, duration: 1 });
+                gsap.fromTo(qr, { scale: 0, opacity: 0 }, {
+                  scale: 1,
+                  opacity: 1,
+                  duration: 1,
+                  ease: "back.out(1.7)"
+                });
+              });
+            } else {
+              Swal.fire('Ups!', 'Salah tanggal 😅', 'error').then(() => {
+                document.querySelector('.nine').style.display = 'none';
+                showDatePrompt(); // Tampilkan lagi input tanggal
+              });
+            }
+          }
+        });
+      };
+
+      showDatePrompt(); // Pertama kali dipanggil
     })
     .to(".six", 0.5, {
       opacity: 0,
@@ -203,62 +205,15 @@ const animationTimeline = () => {
 
   const replyBtn = document.getElementById("replay");
   replyBtn.addEventListener("click", () => {
-    tl.tes(); // Perlu didefinisikan ulang kalau ingin replay timeline
+    window.location.reload(); // reload ulang biar animasi ulang
   });
 };
+window.addEventListener("beforeunload", () => {
+  const lagu = document.querySelector(".song");
 
-const checkBirthday = () => {
-  Swal.fire({
-    title: 'Masukin tanggal lahirmu ya!',
-    input: 'text',
-    inputLabel: 'Format: DD-MM-YYYY (contoh: 10-04-2007)',
-    inputPlaceholder: 'Ketik di sini...',
-    showCancelButton: false,
-    confirmButtonText: 'Cek',
-    allowOutsideClick: false,
-    inputValidator: (value) => {
-      if (!value) return 'Kamu belum isi apa-apa!';
-    }
-  }).then((result) => {
-    if (result.isConfirmed) {
-      const input = result.value.trim();
-      const tanggalBenar = "10-04-2007"; // Ganti sesuai tanggal yang benar
-
-      if (input === tanggalBenar) {
-        Swal.fire({
-          title: 'Yeay 🎉',
-          text: 'Ini QR-nya yaa~',
-          icon: 'success',
-          confirmButtonText: 'Tampilkan',
-        }).then(() => {
-          const nine = document.querySelector('.nine');
-          const qr = document.getElementById('qr-shopeepay');
-          const replay = document.getElementById('replay');
-
-          nine.style.display = 'block';
-          qr.style.display = 'block';
-          replay.style.display = 'block';
-
-          gsap.fromTo(nine, { opacity: 0 }, { opacity: 1, duration: 1 });
-          gsap.fromTo(qr, { scale: 0, opacity: 0 }, {
-            scale: 1,
-            opacity: 1,
-            duration: 1,
-            ease: "back.out(1.7)"
-          });
-        });
-      } else {
-        Swal.fire({
-          title: 'Ups!',
-          text: 'Salah tanggal 😅',
-          icon: 'error',
-          confirmButtonText: 'Coba lagi'
-        }).then(() => {
-          checkBirthday(); // Input ulang
-        });
-
-        document.querySelector('.nine').style.display = 'none';
-      }
-    }
-  });
-};
+  if (lagu) {
+    lagu.pause();           // Hentikan lagu
+    lagu.currentTime = 0;   // Reset ke awal
+    lagu.remove();          // Hapus dari DOM
+  }
+});
