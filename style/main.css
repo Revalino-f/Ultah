@@ -5,6 +5,13 @@ html {
 body {
   font-family: 'Poppins', sans-serif;
   margin: 0;
+   user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    pointer-events: none;
+    user-drag: none;
+    -webkit-user-drag: none;
 }
 
 .song {
